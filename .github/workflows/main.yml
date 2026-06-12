@@ -8,6 +8,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+
     steps:
 
       - uses: actions/checkout@v4
@@ -16,5 +19,7 @@ jobs:
 
         with:
           python-version: "3.11"
+
+      - run: pip install requests
 
       - run: python earnings_monitor.py
