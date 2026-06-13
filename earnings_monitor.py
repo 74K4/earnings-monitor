@@ -38,14 +38,16 @@ for stock in stocks:
         continue
 
     eps_beat = latest["epsActual"] > latest["epsEstimated"]
-
     rev_beat = latest["revenueActual"] > latest["revenueEstimated"]
 
-if eps_beat and rev_beat:
+    print("EPS Beat =", eps_beat)
+    print("Revenue Beat =", rev_beat)
 
-    message = {
-        "content":
-        f"""@everyone
+    if eps_beat and rev_beat:
+
+        message = {
+            "content":
+            f"""@everyone
 
 {stock}
 
@@ -60,11 +62,11 @@ Revenue Estimate: {latest['revenueEstimated']}
 EPS Beat: True
 Revenue Beat: True
 """
-    }
+        }
 
-    response = requests.post(
-        WEBHOOK,
-        json=message
-    )
+        response = requests.post(
+            WEBHOOK,
+            json=message
+        )
 
-    print(f"{stock} 通知送信")
+        print(f"{stock} 通知送信")
