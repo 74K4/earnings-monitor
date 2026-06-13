@@ -1,8 +1,17 @@
 import os
 import requests
+import json
 
 API_KEY = os.environ["FMP_API_KEY"]
 WEBHOOK = os.environ["DISCORD_WEBHOOK"]
+
+try:
+    with open("last_results.json", "r") as f:
+        old_results = json.load(f)
+except:
+    old_results = {}
+
+new_results = {}
 
 stocks = [
     "NVDA",
@@ -40,19 +49,38 @@ for stock in stocks:
     eps_beat = latest["epsActual"] > latest["epsEstimated"]
     rev_beat = latest["revenueActual"] > latest["revenueEstimated"]
 
+    current_status = eps_beat and rev_beat
+    
+    new_results[stock] = current_status
+
     print("EPS Beat =", eps_beat)
     print("Revenue Beat =", rev_beat)
 
-    if eps_beat and rev_beat:
+    old_status = old_results.get(stock)
 
-        message = {
-            "content":
-            f"""@everyone
+    if old_status != current_status:
+        
+    message = {
+        "content":
+        f"""@everyone
 
-{stock}
+    {stock}
 
-Date: {latest['date']}
+    状態変化を検出
 
+    前回: {old_status}
+    今回: {current_status}
+
+    Date: {latest['date']}
+    """
+    }
+with open("last_results.json", "w") as f:
+    json.dump(
+        new_results,
+        f,
+        indent=4
+    )
+    
 EPS Actual: {latest['epsActual']}
 EPS Estimate: {latest['epsEstimated']}
 
