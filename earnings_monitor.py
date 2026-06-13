@@ -8,8 +8,7 @@ stocks = [
     "META",
     "AMZN",
     "GOOGL",
-    "MSFT",
-    "LAR"
+    "MSFT"
 ]
 
 for stock in stocks:
