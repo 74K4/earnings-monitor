@@ -19,7 +19,12 @@ stocks = [
     "META",
     "AMZN",
     "GOOGL",
-    "MSFT"
+    "MSFT",
+    "CCL",
+    "FDX",
+    "LEVI",
+    "MU",
+    "NKE",
 ]
 
 for stock in stocks:
