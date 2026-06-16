@@ -3,5 +3,10 @@
     "META": true,
     "AMZN": true,
     "GOOGL": true,
-    "MSFT": true
+    "MSFT": true,
+    "CCL": true,
+    "FDX": true,
+    "LEVI": true,
+    "MU": true,
+    "NKE": true,
 }
