@@ -34,7 +34,18 @@ for stock in stocks:
 
     url = f"https://financialmodelingprep.com/stable/earnings?symbol={stock}&apikey={API_KEY}"
 
-    data = requests.get(url).json()
+    response = requests.get(url)
+
+if response.status_code != 200:
+    print(f"{stock} API Error:", response.status_code)
+    continue
+
+try:
+    data = response.json()
+except:
+    print(f"{stock} JSON Decode Error")
+    print(response.text[:500])
+    continue
 
     latest = None
 
