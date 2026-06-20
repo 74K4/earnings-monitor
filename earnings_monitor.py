@@ -22,9 +22,8 @@ stocks = [
     "MSFT",
     "CCL",
     "FDX",
-    "LEVI",
     "MU",
-    "NKE",
+    "NKE"
 ]
 
 for stock in stocks:
@@ -36,16 +35,16 @@ for stock in stocks:
 
     response = requests.get(url)
 
-if response.status_code != 200:
-    print(f"{stock} API Error:", response.status_code)
-    continue
+    if response.status_code != 200:
+        print(f"{stock} API Error: {response.status_code}")
+        continue
 
-try:
-    data = response.json()
-except:
-    print(f"{stock} JSON Decode Error")
-    print(response.text[:500])
-    continue
+    try:
+        data = response.json()
+    except:
+        print(f"{stock} JSON Decode Error")
+        print(response.text[:500])
+        continue
 
     latest = None
 
@@ -90,6 +89,9 @@ EPS Estimate: {latest['epsEstimated']}
 
 Revenue Actual: {latest['revenueActual']}
 Revenue Estimate: {latest['revenueEstimated']}
+
+EPS Beat: {eps_beat}
+Revenue Beat: {rev_beat}
 """
         }
 
