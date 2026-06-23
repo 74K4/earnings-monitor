@@ -4,7 +4,7 @@
     "AMZN": true,
     "GOOGL": true,
     "MSFT": true,
-    "CCL": true,
+    "CCL": false,
     "FDX": true,
     "NKE": true
 }
